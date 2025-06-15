@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    {% load static %}
+    <!--link for css file-->
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+
+</head>
+<body>
+
+
+
+        <!--SECTION FOR THE MESSAGES STARTS-->
+
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="success_message_box">
+                <p class="message.error error_message">{{message}}</p>
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+
+        <!--SECTION FOR THE MESSAGES ENDS-->
+
+
+
+    <!--SECTION FOR THE ACTUAL FORM STARTS-->
+
+
+<div class="form-wrap">
+
+    <section id="form-body">
+
+
+
+        <!--for the main form-->
+
+        
+
+
+       
+
+
+            
+
+
+            <form action="" method="post" class="form-box">
+
+
+                <h1 class="form-head">SIGN UP</h1>
+
+
+                {% csrf_token %}
+        
+                <input type="text" placeholder="Name" name="username" class="input">
+        
+                <input type="email" placeholder="Email" name="email" class="input">
+        
+                <div class="country-age">
+                    <input type="text" placeholder="Country" name="country" class="form-off">
+        
+                    <input type="number" placeholder="Age" name="userage" class="form-off">
+                </div>
+        
+                <input type="password" placeholder="Password" name="password" class="input">
+        
+        
+                <div class="submit-btn-box">
+                    <button type="submit" class="submit-btn">Signup</button>
+                </div>
+        
+        
+            </form>
+
+
+        
+        
+
+
+        
+
+
+
+
+        <!--for the image-->
+        <div class="gradient-overlay-container">
+
+
+            <img src="{% static 'images/signup-img.jpg' %}" alt="signup_img" class="signup_img">
+
+
+
+        </div>
+
+
+
+    </section>
+
+</div>    
+
+</body>
+</html>

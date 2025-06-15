@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <style>
+        /* Add this CSS to prevent text shifting */
+        #changing-word {
+            display: inline-block;
+            min-width: 100px; /* Adjust based on your longest word (e.g., "GRACE") */
+            text-align: left;
+            color: #FC466B;
+        }
+        
+        /* Scroll Animation Styles - ADDED */
+        .about-img {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 0.8s ease-out;
+        }
+        .about-disc {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 0.8s ease-out 0.3s;
+        }
+        .animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    
+<!--The nav bar of the website-->
+<nav class="nav-bar">
+    <img src="{% static 'images/new_moments_with_christ_logo 1.png' %}" alt="" class="logo">
+    <ul class="center-nav">
+        <a href="{% url 'home' %}" class="nav-link"><h5>Home</h5></a>
+        <a href="{% url 'home' %}#nextBtn" class="nav-link"><h5>Videos</h5></a>
+        <a href="{% url 'home' %}#about-us" class="nav-link"><h5>Sermons</h5></a>
+        <a href="https://paystack.com/pay/donationpge" class="nav-link"><h5>Donate</h5></a>
+    </ul>
+    <ul class="nav-end">
+        <a href="{% url 'login' %}" class="login"><h5>Log in</h5></a>
+        <a href="{% url 'signup' %}" class="signup"><h5>Sign up</h5></a>
+    </ul>
+    <!-- Added menu toggle button -->
+    <button class="menu-toggle" aria-label="Menu">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+    </button>
+</nav>
+
+<!-- Added side menu (place before closing body tag) -->
+<div class="side-menu">
+    <div class="side-menu-content">
+        <a href="{% url 'home' %}" class="side-nav-link"><h5>Home</h5></a>
+        <a href="{% url 'home' %}#nextBtn" class="side-nav-link"><h5>Videos</h5></a>
+        <a href="{% url 'home' %}#about-us" class="side-nav-link"><h5>Sermons</h5></a>
+        <a href="https://paystack.com/pay/donationpge" class="side-nav-link"><h5>Donate</h5></a>
+        <a href="{% url 'login' %}" class="side-nav-link"><h5>Log in</h5></a>
+        <a href="{% url 'signup' %}" class="side-nav-link"><h5>Sign up</h5></a>
+    </div>
+</div>
+
+<!--The banner for the home page-->
+<section class="banner_bdy">
+    <div class="banner" style="background-image:  linear-gradient(
+        to bottom, 
+        rgba(252, 70, 107, 0.83), 
+        rgba(63, 94, 251, 0.51)
+    ), url('{% static 'images/new-banner.jpeg' %}');">
+        <div class="banner-disc">
+            <h3 class="banner-disc-header">
+                CHRIST FOR ALL
+            </h3>
+            <h1 class="post-head-title">
+                A PLACE TO GROW IN <span id="changing-word">FAITH</span> AND THE LOVE OF CHRIST
+            </h1>
+            <a href="#about-us" class="view-more"><h5>View more</h5></a>
+        </div>
+    </div>            
+</section>
+
+<!--THE ABOUT US SECTION FOR THE WEBSITE-->
+<section id="about-us">
+    <img src="{% static 'images/new-about.jpg' %}" alt="" class="about-img">
+    <div class="about-disc">
+        <h2 class="about-head">
+            Come and Experience the Love of Christ
+        </h2>
+        <h5 class="about-more">
+            This is a website set to preach the word of God to all and sundry.
+            We were enlightened in the ways of
+            Christ to bring all towards himself. Come and experience Christ, and cast all
+            your burdens on him. Please signup to join our community of belivers. Thank you.
+        </h5>
+        <a href="{% url 'signup' %}" class="about-btn"><h5>Signup</h5></a>
+    </div>
+</section>
+
+
+
+
+
+ <!--THE MAIN POST SECTION STARTS-->
+
+
+ <section class="main-post">
+
+
+    <h2 class="post-head">
+        Explore our latest sermons and post.
+    </h2>
+
+
+    <div class="post-slider">
+        <button id="prevBtn" class="slider-btn"> <h1> < </h1> </button>
+    
+        <div class="post-container">
+            <div class="post-boxes">
+                {% for post in image_posts %}
+                    <div class="recent-post">
+                        {% if post.image_head %}
+                            <img src="{{ post.image_head.url }}" alt="" class="recent_post_img">
+                        {% endif %}
+                        <div class="recent-post-texts">
+                            <h3 class="recent-post-head"><a href="{% url 'post_single' post.slug %}" class="recent_post_head_link">{{ post.post_title }}</a></h3>
+                            <h5 class="recent-post-content">{{ post.post_content|safe|truncatewords:15 }}</h5>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+    
+        <button id="nextBtn" class="slider-btn"><h1> > </h1></button>
+
+
+    </div>
+    
+    
+
+
+
+   <!-- Video Slider Section -->
+   <div class="video-slider">
+    <h2 class="post-head">Watch Our Latest Videos</h2>
+    
+    <!-- Navigation Buttons -->
+    <button id="video-prevBtn" class="slider-btn"><h1> < </h1></button>
+    
+    <!-- Video Grid Container -->
+    <div class="video-grid-container">
+        {% for post in video_posts %}
+            <div class="video-post">
+                {% if post.video_head %}
+                    <div class="video-player">
+                        <video controls>
+                            <source src="{{ post.video_head.url }}" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>{{ post.post_title }}</h3>
+                        <a href="{% url 'post_single' post.slug %}">
+                            <img src="{% static 'images/button_video.png' %}" alt="Watch video" class="video-btn">
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <div class="no-videos">
+                <p>No videos available yet. Check back soon!</p>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <button id="video-nextBtn" class="slider-btn"><h1> > </h1></button>
+    
+    <!-- Pagination Indicator -->
+    <div class="pagination-indicator">
+        <h4>Page <span id="currentPage">1</span> of <span id="totalPages">1</span></h4>
+    </div>
+</div>
+
+
+  
+    
+
+
+</section>
+
+
+<!--THE MAIN POST SECTION ENDS-->
+
+
+
+
+ <!--THE FOOTER STARTS-->
+
+
+ <footer>
+
+
+    <div class="footer">
+
+        <div class="side1">
+    
+            <h4 class="side1-head">Quick Links</h4>
+    
+            <a href="{% url 'home' %}" class="footer-link"><h5 class="footer-main">Home</h5></a>
+            <a href="{% url 'home' %}#about-us" class="footer-link"><h5 class="footer-main">About us</h5></a>
+            <a href="{% url 'home' %}#about-us" class="footer-link"><h5 class="footer-main">Sermons</h5></a>
+            <a href="{% url 'home' %}#nextBtn" class="footer-link"><h5 class="footer-main">Our videos</h5></a>
+            <a href="https://paystack.com/pay/donationpge" class="footer-link"><h5 class="footer-main">Donate</h5></a>
+    
+    
+        </div>
+    
+    
+        <div class="side1">
+    
+            <h4 class="side1-head">Coming soon!!!</h4>
+    
+            <h5 class="footer-main">Prayers</h5>
+            <h5 class="footer-main">Hymns</h5>
+            <h5 class="footer-main">Catholic prayers</h5>
+            <h5 class="footer-main">Inspirational coursels</h5>
+    
+    
+        </div>
+    
+    
+        <div class="side1">
+    
+            <h4 class="side1-head">Contact us</h4>
+    
+            <a href="https://mail.google.com/mail/u/2/#inbox" class="footer-link"><h5 class="footer-main">Email us</h5></a>
+    
+    
+        </div>
+    
+    
+        <div class="side1">
+    
+            <h4 class="side1-head">Follow us</h4>
+    
+            <a href="https://www.whatsapp.com/channel/0029VajdkyhCsU9XUmITrI20" class="footer-link"><h5 class="footer-main">WhatsApp</h5></a>
+            <a href="https://www.instagram.com/christforall29?igsh=YzljYTk1ODg3Zg==" class="footer-link"><h5 class="footer-main">Instagram</h5></a>
+            
+    
+    
+        </div>
+    
+    
+        
+    
+    </div>
+
+    <h5 class="footer-end">Copyright Chrsit for all 2025</h5>
+
+ </footer>
+
+
+ <!--THE FOOTER ENDS-->
+
+
+
+
+
+
+<!-- Typewriter + Backspace Effect -->
+<script>
+    const words = ["FAITH", "HOPE", "GRACE"];
+    let currentIndex = 0;
+    let isDeleting = false;
+    let wordIndex = 0;
+    let currentText = "";
+    const wordElement = document.getElementById("changing-word");
+    let typingSpeed = 150; // Speed of typing (ms per letter)
+    let deletingSpeed = 75; // Speed of deleting (ms per letter)
+    let delayBetweenWords = 1000; // Pause before next word (ms)
+
+    function typeWriterEffect() {
+        const currentWord = words[currentIndex];
+
+        if (isDeleting) {
+            // Backspace effect (remove letters one by one)
+            currentText = currentWord.substring(0, wordIndex - 1);
+            wordIndex--;
+        } else {
+            // Typing effect (add letters one by one)
+            currentText = currentWord.substring(0, wordIndex + 1);
+            wordIndex++;
+        }
+
+        wordElement.textContent = currentText;
+
+        // Check if word is fully typed or fully deleted
+        if (!isDeleting && currentText === currentWord) {
+            // Pause before deleting
+            isDeleting = true;
+            setTimeout(typeWriterEffect, delayBetweenWords);
+        } else if (isDeleting && currentText === "") {
+            // Move to next word after deleting
+            isDeleting = false;
+            currentIndex = (currentIndex + 1) % words.length;
+            setTimeout(typeWriterEffect, typingSpeed);
+        } else {
+            // Continue typing/deleting
+            setTimeout(typeWriterEffect, isDeleting ? deletingSpeed : typingSpeed);
+        }
+    }
+
+    // Start the effect after a small delay
+    setTimeout(typeWriterEffect, 1000);
+</script>
+
+<!-- Scroll Animation Script - ADDED -->
+<script>
+    function animateOnScroll() {
+        const aboutSection = document.getElementById('about-us');
+        const aboutImg = document.querySelector('.about-img');
+        const aboutDisc = document.querySelector('.about-disc');
+        const sectionPosition = aboutSection.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 3;
+
+        if (sectionPosition < screenPosition) {
+            aboutImg.classList.add('animate');
+            aboutDisc.classList.add('animate');
+        }
+    }
+
+    // Trigger animations
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+</script>
+
+
+<script>
+
+
+// Side menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sideMenu = document.querySelector('.side-menu');
+    const body = document.body;
+    
+    menuToggle.addEventListener('click', function() {
+        sideMenu.classList.toggle('active');
+        body.classList.toggle('menu-open');
+    });
+    
+    // Close menu when clicking on overlay
+    body.addEventListener('click', function(e) {
+        if (body.classList.contains('menu-open') && 
+            !sideMenu.contains(e.target) && 
+            e.target !== menuToggle && 
+            !menuToggle.contains(e.target)) {
+            sideMenu.classList.remove('active');
+            body.classList.remove('menu-open');
+        }
+    });
+});
+
+
+</script>
+
+
+<!--for the posts section-->
+<script src="{% static 'slider.js' %}"></script>
+<!-- Load the video slider script -->
+<script src="{% static 'video-slider.js' %}"></script>
+</body>
+</html>

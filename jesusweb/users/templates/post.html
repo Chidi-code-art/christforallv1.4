@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.post_title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/post.css' %}">
+</head>
+<body>
+    <!-- THE NAV FOR POSTS BEGINS -->
+    <!--The nav bar of the website-->
+<nav class="nav-bar">
+    <img src="{% static 'images/new_moments_with_christ_logo 1.png' %}" alt="" class="logo">
+    <ul class="center-nav">
+        <a href="{% url 'home' %}" class="nav-link"><h5>Home</h5></a>
+        <a href="{% url 'home' %}#nextBtn" class="nav-link"><h5>Videos</h5></a>
+        <a href="{% url 'home' %}#about-us" class="nav-link"><h5>Sermons</h5></a>
+        <a href="https://paystack.com/pay/donationpge" class="nav-link"><h5>Donate</h5></a>
+    </ul>
+    <ul class="nav-end">
+        <a href="{% url 'login' %}" class="login"><h5>Log in</h5></a>
+        <a href="{% url 'signup' %}" class="signup"><h5>Sign up</h5></a>
+    </ul>
+    <!-- Added menu toggle button -->
+    <button class="menu-toggle" aria-label="Menu">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+    </button>
+</nav>
+
+<!-- Added side menu (place before closing body tag) -->
+<div class="side-menu">
+    <div class="side-menu-content">
+        <a href="{% url 'home' %}" class="side-nav-link"><h5>Home</h5></a>
+        <a href="{% url 'home' %}#nextBtn" class="side-nav-link"><h5>Videos</h5></a>
+        <a href="{% url 'home' %}#about-us" class="side-nav-link"><h5>Sermons</h5></a>
+        <a href="https://paystack.com/pay/donationpge" class="side-nav-link"><h5>Donate</h5></a>
+        <a href="{% url 'login' %}" class="side-nav-link"><h5>Log in</h5></a>
+        <a href="{% url 'signup' %}" class="side-nav-link"><h5>Sign up</h5></a>
+    </div>
+</div>
+
+    <!-- THE NAV FOR POSTS ENDS -->
+
+    <!-- THE BANNER FOR POST STARTS -->
+    <section class="banner">
+        {% if post.video_head %}
+            <!-- Video Post Display -->
+            <div class="video-container">
+                <video controls width="100%">
+                    <source src="{{ post.video_head.url }}" type="video/mp4">
+                    Your browser doesn't support HTML5 video.
+                </video>
+            </div>
+        {% else %}
+            <!-- Image Post Display -->
+            {% if post.image_head %}
+                <img src="{{ post.image_head.url }}" alt="{{ post.post_title }}" class="recent_post_img">
+                {% if post.image_credit %}
+                    <p class="image-credit">Image credit: {{ post.image_credit }}</p>
+                {% endif %}
+            {% else %}
+                <div class="no-media">No media available</div>
+            {% endif %}
+        {% endif %}
+
+        <div class="banner-disc">
+            <h1 class="post-title">{{ post.post_title }}</h1>
+            <h3 class="post-date">{{ post.post_date }}</h3>
+            <h4 class="post-content">{{ post.post_content|safe }}</h4>
+
+            <!-- Post Actions (Share, Print, Like) -->
+            <div class="social-section">
+                <h2 class="social-head">Follow, like and share the love</h2>
+                <div class="post-actions">
+                    <!-- WhatsApp Button -->
+                    <div class="social-link">
+                        <a href="https://www.whatsapp.com/channel/0029VajdkyhCsU9XUmITrI20" target="_blank" class="action-btn whatsapp-btn">
+                            <img src="{% static 'images/whatsapp.png' %}" alt="WhatsApp" class="action-icon">
+                        </a>
+                    </div>
+                    
+                    <!-- Share Button -->
+                    <div class="social-link">
+                        <button class="action-btn share-btn" onclick="sharePost()">
+                            <img src="{% static 'images/share.png' %}" alt="Share" class="action-icon">
+                        </button>
+                    </div>
+                    
+                    <!-- Print Button -->
+                    <div class="social-link">
+                        <button class="action-btn print-btn" onclick="printPost()">
+                            <img src="{% static 'images/print.png' %}" alt="Print" class="action-icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- THE BANNER FOR POST ENDS -->
+
+
+ <!--THE FOOTER STARTS-->
+
+
+ <footer>
+
+
+    <div class="footer">
+
+        <div class="side1">
+    
+            <h4 class="side1-head">Quick Links</h4>
+    
+            <a href="{% url 'home' %}" class="footer-link"><h5 class="footer-main">Home</h5></a>
+            <a href="{% url 'home' %}#about-us" class="footer-link"><h5 class="footer-main">About us</h5></a>
+            <a href="{% url 'home' %}#about-us" class="footer-link"><h5 class="footer-main">Sermons</h5></a>
+            <a href="{% url 'home' %}#nextBtn" class="footer-link"><h5 class="footer-main">Our videos</h5></a>
+            <a href="https://paystack.com/pay/donationpge" class="footer-link"><h5 class="footer-main">Donate</h5></a>
+    
+        </div>
+    
+    
+        <div class="side1">
+    
+            <h4 class="side1-head">Coming soon!!!</h4>
+    
+            <h5 class="footer-main">Prayers</h5>
+            <h5 class="footer-main">Hymns</h5>
+            <h5 class="footer-main">Catholic prayers</h5>
+            <h5 class="footer-main">Inspirational coursels</h5>
+    
+    
+        </div>
+    
+    
+        <div class="side1">
+    
+            <h4 class="side1-head">Contact us</h4>
+    
+            <a href="https://mail.google.com/mail/u/2/#inbox" class="footer-link"><h5 class="footer-main">Email us</h5></a>
+    
+    
+        </div>
+    
+    
+        <div class="side1">
+    
+            <h4 class="side1-head">Follow us</h4>
+    
+            <a href="https://www.whatsapp.com/channel/0029VajdkyhCsU9XUmITrI20" class="footer-link"><h5 class="footer-main">WhatsApp</h5></a>
+            <a href="https://www.instagram.com/christforall29?igsh=YzljYTk1ODg3Zg==" class="footer-link"><h5 class="footer-main">Instagram</h5></a>
+            
+    
+    
+        </div>
+    
+    
+        
+    
+    </div>
+
+    <h5 class="footer-end">Copyright Chrsit for all 2025</h5>
+
+ </footer>
+
+
+ <!--THE FOOTER ENDS-->
+
+
+
+    <!-- JavaScript for Functionality -->
+    <script>
+        // Function to copy the post link
+        function copyLink() {
+            const postUrl = window.location.href;
+            navigator.clipboard.writeText(postUrl)
+                .then(() => alert('Link copied to clipboard!'))
+                .catch(() => alert('Failed to copy link.'));
+        }
+
+        // Function to print the post
+        function printPost() {
+            window.print();
+        }
+
+        // Function to like the post
+        function likePost(button) {
+            const likeCount = button.querySelector('.like-count');
+            let likes = parseInt(likeCount.innerText);
+
+            // Increment likes
+            likes += 1;
+            likeCount.innerText = likes;
+
+            // Disable the button after liking
+            button.disabled = true;
+
+            // Save likes to local storage
+            localStorage.setItem('postLikes', likes);
+        }
+
+        // Function to load likes from local storage
+        function loadLikes() {
+            const likeButton = document.querySelector('.like-btn');
+            const likeCount = likeButton.querySelector('.like-count');
+
+            // Get likes from local storage
+            const savedLikes = localStorage.getItem('postLikes');
+
+            if (savedLikes) {
+                likeCount.innerText = savedLikes;
+            }
+
+            // Disable the button if the post has already been liked
+            if (savedLikes > 0) {
+                likeButton.disabled = true;
+            }
+        }
+
+        // Load likes when the page loads
+        window.onload = loadLikes;
+    </script>
+
+
+
+
+<script>
+    // WhatsApp redirect is handled by the link directly
+    
+    // Improved Share Function
+    function sharePost() {
+        if (navigator.share) {
+            navigator.share({
+                title: "{{ post.post_title }}",
+                text: "Check out this post from Moments With Christ",
+                url: window.location.href
+            }).catch(err => {
+                console.log('Error sharing:', err);
+                copyLink();
+            });
+        } else {
+            copyLink();
+        }
+    }
+    
+    // Copy Link Function
+    function copyLink() {
+        const postUrl = window.location.href;
+        navigator.clipboard.writeText(postUrl)
+            .then(() => alert('Link copied to clipboard!'))
+            .catch(() => alert('Failed to copy link.'));
+    }
+    
+    // Print Function
+    function printPost() {
+        window.print();
+    }
+</script>
+
+<script>
+
+
+    // Side menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const sideMenu = document.querySelector('.side-menu');
+        const body = document.body;
+        
+        menuToggle.addEventListener('click', function() {
+            sideMenu.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+        
+        // Close menu when clicking on overlay
+        body.addEventListener('click', function(e) {
+            if (body.classList.contains('menu-open') && 
+                !sideMenu.contains(e.target) && 
+                e.target !== menuToggle && 
+                !menuToggle.contains(e.target)) {
+                sideMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
+    });
+    
+    
+    </script>
+    
+
+</body>
+</html>

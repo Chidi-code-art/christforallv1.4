@@ -1,0 +1,326 @@
+@font-face{
+    font-family: "Poppins-Light";
+    src: url('../Fonts/Poppins-Light.ttf') format('truetype');
+}
+
+
+body{
+    font-family: 'Poppins-Light';
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*FORM STYLE*/
+#form-body{
+    position: relative;
+    height: 32rem;
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 2px 2px #dfdfdf;
+    width: 75%;
+    border-radius: 10px;
+}
+.form-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+}
+.form-box{
+    width: 30em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+}
+.gradient-overlay-container {
+    position: relative;
+    display: inline-block;
+}
+
+.gradient-overlay-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 22em;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(252, 70, 107, 0.83), rgba(63, 94, 251, 0.51));
+    border-radius: 17px;
+}
+
+.signup_img {
+    display: block;
+    width: 22em;
+    height: 30.5em;
+}
+.form-head{
+    text-align: center;
+}
+.form-encompass{
+    height: fit-content;
+    border-radius: 1em;
+}
+.input{
+    width: 30em;
+    height: 3em;
+    margin-bottom: 5%;
+    background: white;
+    border-bottom: 2px solid #fc466a91;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding-left: 2%;
+    outline: none;
+}
+.input:focus {
+    outline: none;
+    border-color: linear-gradient(45deg, #FC466B, #3F5EFB);
+    box-shadow: 0 0 10px linear-gradient(45deg, #FC466B, #3F5EFB);
+    border-image: linear-gradient(45deg, #FC466B, #3F5EFB) 1;
+    transition: all 3s;
+}
+.country-age{
+    width: 26em;
+    height: 3em;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+.form-off{
+    width: 13em;
+    height: 3em;
+    background: white;
+    border-bottom: 2px solid #fc466a91;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding-left: 2%;
+    outline: none;
+}
+.form-off:focus {
+    outline: none;
+    border-color: linear-gradient(45deg, #FC466B, #3F5EFB);
+    box-shadow: 0 0 10px linear-gradient(45deg, #FC466B, #3F5EFB);
+    border-image: linear-gradient(45deg, #FC466B, #3F5EFB) 1;
+    transition: all 3s;
+}
+.submit-btn-box{
+    width: 25.5em;
+}
+.submit-btn{
+    background-color: #FC466B;
+    width: 10em;
+    height: 3em;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+.submit-btn:hover{
+    background-color: #ed738b;
+    border-radius: 0;
+    transition: all 0.5s ease-in-out;
+}
+.error_message{
+    font-size: 15px;
+    color: white;
+}
+.success_message_box{
+    position: fixed;
+    z-index: 222;
+    width: 50%;
+    height: 4em;
+    left: 25%;
+    border-radius: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+    background-color: red;
+}
+
+/*media query for desktop*/
+@media(max-width:1030px){
+
+    .form-head{
+        font-size: 1.5em;
+    }
+    .input{
+       width: 25em; /*5*/
+    }
+    .form-off{
+        width: 10em; /*3*/
+    }
+    .country-age{
+        gap: 13.5%; 
+        justify-content: center;
+    }
+    .submit-btn{
+        width: 8em; /*2*/
+    }
+    .submit-btn-box{
+        padding-left: 12%;
+    }.signup_img{
+        width: 17em; /*5*/
+        height: 25em; /*5*/
+        margin-right: 4em;
+    }
+    .gradient-overlay-container::after{
+        width: 17em;
+        height: 25em;
+        margin-right: 5%;
+    }
+    #form-body{
+       gap: 0;
+       display: flex;
+       flex-direction: row;
+       justify-content: center;
+
+    }
+}
+
+/*for smaller desktops*/
+@media(max-width:955px){
+    .form-wrap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+    }
+    .form-head{
+        font-size: 1em;
+    }
+    .input{
+       width: 20em; /*5*/
+    }
+    .form-off{
+        width: 7em; /*3*/
+    }
+    .country-age{
+        gap: 16%; 
+        justify-content: center;
+    }
+    .submit-btn{
+        width: 6em; /*2*/
+    }
+    .submit-btn-box{
+        padding-left: 25%;
+    }.signup_img{
+        width: 12em; /*5*/
+        height: 20em; /*5*/
+        margin-right: 4em;
+    }
+    .gradient-overlay-container::after{
+        width: 12em;
+        height: 20em;
+        margin-right: 5%;
+    }
+    #form-body{
+       gap: 0;
+       display: flex;
+       flex-direction: row;
+       justify-content: center; 
+       width: 45em; /*25*/
+       height: 25rem; /*20*/
+    }
+}
+
+/*for smaller ipads*/
+@media(max-width:750px){
+    .form-wrap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 95vh;
+    }
+    .form-head{
+        font-size: 1em;
+    }
+    .input{
+       width: 20em; /*5*/
+    }
+    .form-off{
+        width: 7em; /*3*/
+    }
+    .country-age{
+        gap: 16%; 
+        justify-content: center;
+    }
+    .submit-btn{
+        width: 6em; /*2*/
+    }
+    .submit-btn-box{
+        padding-left: 25%;
+    }.signup_img{
+        width: 12em; /*5*/
+        height: 20em; /*5*/
+        margin-right: 4em;
+        display: none;
+    }
+    .gradient-overlay-container::after{
+        width: 12em;
+        height: 20em;
+        margin-right: 5%;
+        display: none;
+    }
+    #form-body{
+       gap: 0;
+       width: 25em; /*25*/
+       height: 23rem; /*20*/
+       box-shadow:1px 1px 2px 2px #dfdfdf;
+    }
+}
+
+/*for phones*/
+/*for smaller ipads*/
+@media(max-width:550px){
+    .form-wrap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+    .form-head{
+        font-size: 1em;
+    }
+    .input{
+       width: 17em; /*5*/
+    }
+    .form-off{
+        width: 5em; /*3*/
+    }
+    .country-age{
+        gap: 38%; 
+        justify-content: center;
+        width: 15em;
+    }
+    .submit-btn{
+        width: 6em; /*2*/
+        font-size: 65%;
+    }
+    .submit-btn-box{
+        padding-left: 0;
+        width: 15rem;
+    }.signup_img{
+        width: 12em; /*5*/
+        height: 20em; /*5*/
+        margin-right: 4em;
+        display: none;
+    }
+    .gradient-overlay-container::after{
+        width: 12em;
+        height: 20em;
+        margin-right: 5%;
+        display: none;
+    }
+    #form-body{
+       gap: 0;
+       position: relative;
+       width: 20em; /*25*/
+       height: 25rem; /*20*/
+       box-shadow:1px 1px 2px 2px #dfdfdf;
+    }
+}
